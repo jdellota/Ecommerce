@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Add Task</title>
@@ -18,33 +18,29 @@
                     <a href="/home/index" class = "btn btn-primary btn-sm"> Return Home</a>
                 </div>
                 <div class = "panel-body">
-                    <form action = "#" METHOD="POST">
+                    <form action="#"  th:action="@{/home/adduser}" th:object="${user}" METHOD="post">
                         <fieldset>
-
                             <div class ="form-group">
                                 <label class = "control-label">Email</label>
                                 <div class = "controls">
-                                    <input type = "text"  placeholder="" class="form-control" required>
+                                    <input type = "text"  field="*{email}" name="email"   placeholder="" class="form-control"  required>
                                 </div>
                             </div>
-
                             <div class ="form-group">
                                 <label class = "control-label">Password</label>
                                 <div class = "controls">
-                                <input type = "password" placeholder="" class = "form-control" required>
+                                <input type = "password"  field="*{password}" name="password"  placeholder="" class = "form-control" required>
                                 </div>
                             </div>
-
                             <div class ="form-group">
                                 <label class = "control-label">Register as: </label>
                                 <div class = "controls">
-                                    <select  class = "form-control" required>
+                                    <select field="*{role}" name="role"  class = "form-control" required>
                                         <option value ="CUSTOMER" class = "form-control">CUSTOMER</option>
                                         <option value = "SELLER" class = "form-control">SELLER</option>
                                     </select>
                                 </div>
                             </div>
-
                             <div>
                                 <button type="submit" class="btn btn-info col-2 pull-right">Register</button>
                             </div>
