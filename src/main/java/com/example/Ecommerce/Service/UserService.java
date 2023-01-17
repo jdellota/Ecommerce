@@ -14,4 +14,11 @@ public class UserService {
     public UserEntity addUser(UserEntity user) {
         return userRepository.save(user);
     }
+
+    public void saveUser(UserEntity userEntity){
+        this.userRepository.save(userEntity);
+    }
+    public Iterable<UserEntity> getAllUsers(){
+        return userRepository.findAll();
+    }
 }
