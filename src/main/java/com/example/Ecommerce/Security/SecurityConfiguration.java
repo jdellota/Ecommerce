@@ -40,6 +40,8 @@ public class SecurityConfiguration {
                 .httpBasic()
                 .and()
                 .formLogin().disable()
+                .formLogin().loginPage("/home/index")
+                .and()
                 .csrf().disable();
 
         return http.build();

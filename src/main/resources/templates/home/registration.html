@@ -2,10 +2,12 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Add Task</title>
+    <title>Registration</title>
 
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
     <script src = "/js/jquery.js" type = "text/javascript"></script>
+    <script src = "/js/bootstrap.js" type = "text/javascript"></script>
+    <script src = "/fonts/glyphicons-halflings-regular.ttf" type = "text/javascript"></script>
 
     </head>
 <body>
@@ -15,7 +17,7 @@
             <h2>Registration Form</h2>
             <div class="panel panel-default">
                 <div class = "panel-heading">
-                    <a href="/home/index" class = "btn btn-primary btn-sm"> Return Home</a>
+                    <a href="/home/index" class = "btn btn-primary btn-sm"> <span class="glyphicon glyphicon-home" aria-hidden="false"></span></a>
                 </div>
                 <div class = "panel-body">
                     <form action="#"  th:action="@{/home/adduser}" th:object="${user}" METHOD="post">
@@ -46,6 +48,7 @@
                             </div>
                         </fieldset>
                     </form>
+
                 </div>
             </div>
         </div>
