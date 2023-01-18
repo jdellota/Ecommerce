@@ -3,15 +3,13 @@ package com.example.Ecommerce.Controller;
 
 import com.example.Ecommerce.Entity.UserEntity;
 import com.example.Ecommerce.RestController.UserController;
-import com.example.Ecommerce.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/home")
-public class RegistrationView {
+public class HomeView {
     @Autowired
     private UserController restController;
     @GetMapping("/registration")

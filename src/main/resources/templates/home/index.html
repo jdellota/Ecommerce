@@ -18,9 +18,8 @@
             <div class="panel panel-default">
 
                 <div class = "panel-body">
-                    <form action = "#" METHOD="POST">
+                    <form action = "#" th:action="@{/home/adduser}" th:object="${user}" METHOD="POST">
                         <fieldset>
-
                             <div class ="form-group">
                                 <label class = "control-label">Email</label>
                                 <div class = "controls">
