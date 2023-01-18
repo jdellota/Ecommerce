@@ -2,6 +2,8 @@ package com.example.Ecommerce.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.Optional;
+
 @Entity
 @Table(name="products")
 public class ProductEntity {
@@ -18,6 +20,12 @@ public class ProductEntity {
     private UserEntity userEntity;
     public UserEntity getUserEntity() {
         return userEntity;
+    }
+
+    public ProductEntity(String name, Float price, UserEntity userEntity) {
+        this.name = name;
+        this.price = price;
+        this.userEntity = userEntity;
     }
 
     public void setUserEntity(UserEntity userEntity) {
