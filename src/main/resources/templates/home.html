@@ -9,19 +9,15 @@
   <script src = "/fonts/glyphicons-halflings-regular.ttf" type = "text/javascript"></script>
 </head>
 <body>
-<div class="container text-center">
+<div class = "container">
+  <div class = "row">
   <div>
-    <form th:action="@{/logout}" method="post">
-
-      <input type="submit" value="Sign Out" />
-    </form>
-  </div>
-  <div>
-    <h1>List of Users</h1>
+    <a th:href="@{/logout}" class = "btn btn-info pull right">Log Out</a>
   </div>
 
   <div>
-<h1>WELCOME TO HOMEPAGE</h1>
+    <h1>WELCOME TO HOMEPAGE</h1>
+  </div>
   </div>
 </div>
 </body>

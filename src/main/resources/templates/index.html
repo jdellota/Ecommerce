@@ -12,46 +12,22 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class = "col-md-4 col-md-offset-4">
-            <h2>Registration Form</h2>
-            <div class="panel panel-default">
-                <div class = "panel-heading">
-<!--                    <a href="/home/index" class = "btn btn-primary btn-sm"> <span class="glyphicon glyphicon-home" aria-hidden="false"></span></a>-->
-                </div>
-                <div class = "panel-body">
-                    <form action="#"  th:action="@{/home/adduser}" th:object="${user}" METHOD="post">
-                        <fieldset>
-                            <div class ="form-group">
-                                <label class = "control-label">Email</label>
-                                <div class = "controls">
-                                    <input type = "text"  field="*{email}" name="email"   placeholder="" class="form-control"  required>
-                                </div>
-                            </div>
-                            <div class ="form-group">
-                                <label class = "control-label">Password</label>
-                                <div class = "controls">
-                                    <input type = "password"  field="*{password}" name="password"  placeholder="" class = "form-control" required>
-                                </div>
-                            </div>
-                            <div class ="form-group">
-                                <label class = "control-label">Register as: </label>
-                                <div class = "controls">
-                                    <select field="*{role}" name="role"  class = "form-control" required>
-                                        <option value ="CUSTOMER" class = "form-control">CUSTOMER</option>
-                                        <option value = "SELLER" class = "form-control">SELLER</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn-info col-2 pull-right">Register</button>
-                            </div>
-                        </fieldset>
-                    </form>
-
-                </div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">E-Store</a>
             </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
         </div>
+    </nav>
+    <div class="row">
+
 
     </div>
 </div>

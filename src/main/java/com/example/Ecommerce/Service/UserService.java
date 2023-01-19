@@ -13,7 +13,6 @@ public class UserService {
     UserRepository userRepository;
 
     public UserEntity addUser(UserEntity user) {
-
         //Add for encryption
         BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
