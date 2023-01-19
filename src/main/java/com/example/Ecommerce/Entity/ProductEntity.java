@@ -22,12 +22,6 @@ public class ProductEntity {
         return userEntity;
     }
 
-    public ProductEntity(String name, Float price, UserEntity userEntity) {
-        this.name = name;
-        this.price = price;
-        this.userEntity = userEntity;
-    }
-
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
     }

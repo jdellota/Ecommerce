@@ -40,9 +40,9 @@ public class SecurityConfiguration {
                 .httpBasic()
                 .and()
 //                .formLogin().disable()
-                .formLogin().loginPage("/home/index")
-                .failureForwardUrl("Page not found")
-                .and()
+//                .formLogin().loginPage("/home/index")
+//                .failureForwardUrl("Page not found")
+//                .and()
                 .csrf().disable();
 
         return http.build();
