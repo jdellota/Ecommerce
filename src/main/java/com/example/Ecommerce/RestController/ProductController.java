@@ -1,8 +1,10 @@
 package com.example.Ecommerce.RestController;
 
 import com.example.Ecommerce.DTO.ProductDTO;
+import com.example.Ecommerce.Entity.UserEntity;
 import com.example.Ecommerce.Service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,4 +18,5 @@ public class ProductController {
         //return  productDTO;
 
     }
+
 }

@@ -4,12 +4,14 @@ import com.example.Ecommerce.Entity.UserEntity;
 import com.example.Ecommerce.Repository.UserRepository;
 import com.example.Ecommerce.RestController.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -49,11 +51,17 @@ public class UserView {
         return "index";
     }
 
+
+//    public String listUsers(Model model) {
+//        List<UserEntity> listUsers = userRepository.findAll();
+//        model.addAttribute("users", listUsers);
+//        return "home";
+//    }
     @GetMapping("/home")
-    public String listUsers(Model model) {
-        List<UserEntity> listUsers = userRepository.findAll();
-        model.addAttribute("users", listUsers);
-        return "home";
+
+    public String test(@CurrentSecurityContext UserEntity users, Model model){
+        model.addAttribute("users",users);
+        return"home";
     }
 
 
