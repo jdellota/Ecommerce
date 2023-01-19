@@ -25,6 +25,7 @@ public class HomeView {
 
     @PostMapping(path = "/adduser")
     public String addUser(@ModelAttribute("user") UserEntity user){
+
         restController.addUser(user);
         return "/home/index";
     }
