@@ -27,5 +27,8 @@ public class SellerService {
     public List<ProductEntity> viewAllProducts(){
         return productRepository.findAll();
     }
+    public ProductEntity deleteProductById(long id){
+        return productRepository.deleteById(id);
+    }
 
 }
