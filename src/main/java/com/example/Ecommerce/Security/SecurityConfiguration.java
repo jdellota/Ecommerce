@@ -34,8 +34,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .requestMatchers("/api/adduser").hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
+                .requestMatchers("/api/seller").permitAll().anyRequest().permitAll()
                 .and()
                 .httpBasic()
                 .and()

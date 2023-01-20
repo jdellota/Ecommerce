@@ -3,10 +3,12 @@ package com.example.Ecommerce.Controller;
 import com.example.Ecommerce.RestController.ProductController;
 import com.example.Ecommerce.RestController.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
 @RequestMapping("/seller")
 public class SellerView {
     @Autowired
