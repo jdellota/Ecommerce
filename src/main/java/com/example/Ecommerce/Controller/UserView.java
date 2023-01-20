@@ -22,20 +22,14 @@ public class UserView {
     private ProductController productController;
 
 
-
-
     //Method that returns the index
     @GetMapping("/index")
     public String viewHome(){
         return "index";
     }
-
-
     //Method to view the Registration Form
     @GetMapping("/register")
-
     public String showRegistrationForm(Model model){
-
         return "register";
     }
 
@@ -45,7 +39,6 @@ public class UserView {
         userController.addUser(user);
         return "index";
     }
-
 
     //after login
     @GetMapping("/home")
@@ -60,8 +53,9 @@ public class UserView {
             return "seller/index";
         }
         else if (userController.finduser(authentication.getName()).getRole().equals("CUSTOMER")) {
-            //go to customer/index
-                return "index";
+            //Go to customer index and show all products
+            model.addAttribute("products",productController.viewProducts());
+                return "customer/index";
        }
         return null;
 
@@ -85,8 +79,13 @@ public class UserView {
         return "seller/index";
     }
 
-
     //Customers
+
+    @PostMapping("/viewproduct")
+    public String viewProducts(Model model){
+        model.addAttribute("products",productController.viewProducts());
+        return "customer/index";
+    }
 
 
 
