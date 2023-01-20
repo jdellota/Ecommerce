@@ -53,7 +53,9 @@ public class UserView {
     public String test(@CurrentSecurityContext(expression = "authentication")
                        Authentication authentication, Model model){
         if(userController.finduser(authentication.getName()).getRole().equals("SELLER")) {
+            //get current logged in user
             UserEntity user=userController.finduser(authentication.getName());
+
             model.addAttribute("products", user.getProducts());
             return "seller/index";
         }
@@ -82,6 +84,9 @@ public class UserView {
         model.addAttribute("products", user.getProducts());
         return "seller/index";
     }
+
+
+    //Customers
 
 
 
