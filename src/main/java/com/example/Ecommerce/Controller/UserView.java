@@ -43,12 +43,11 @@ public class UserView {
     //after login
     @GetMapping("/home")
 
-    public String test(@CurrentSecurityContext(expression = "authentication")
+    public String checkUser(@CurrentSecurityContext(expression = "authentication")
                        Authentication authentication, Model model){
         if(userController.finduser(authentication.getName()).getRole().equals("SELLER")) {
             //get current logged in user
             UserEntity user=userController.finduser(authentication.getName());
-
             model.addAttribute("products", user.getProducts());
             return "seller/index";
         }
