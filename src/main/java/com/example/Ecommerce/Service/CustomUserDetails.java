@@ -9,6 +9,14 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
     private UserEntity user;
 
     public CustomUserDetails(UserEntity user) {

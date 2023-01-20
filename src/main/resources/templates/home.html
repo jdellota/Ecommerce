@@ -15,11 +15,11 @@
     <a th:href="@{/logout}" class = "btn btn-info pull right">Log Out</a>
   </div>
 
-<!--  <div>-->
-<!--    <h1>WELCOME TO HOMEPAGE</h1>-->
-<!--    <form th:object="${users}">-->
-<!--      <input type="text" field="*{email}" name = "email">-->
-<!--    </form>-->
+  <div>
+    <h1>WELCOME TO HOMEPAGE</h1>
+    <form >
+      <input type="text" th:text="${users}" name = "users">
+    </form>
 
   </div>
   </div>
