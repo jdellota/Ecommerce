@@ -10,9 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserView {
@@ -78,6 +76,15 @@ public class UserView {
         return "seller/index";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@CurrentSecurityContext(expression = "authentication")
+                                    Authentication authentication, @PathVariable(value="id") long id, Model model){
+        productController.deleteProductById(id);
+        UserEntity user=userController.finduser(authentication.getName());
+        model.addAttribute("products", user.getProducts());
+        return "seller/index";
+    }
+
     //Customers
 
     @PostMapping("/viewproduct")
@@ -85,7 +92,6 @@ public class UserView {
         model.addAttribute("products",productController.viewProducts());
         return "customer/index";
     }
-
 
 
 }
