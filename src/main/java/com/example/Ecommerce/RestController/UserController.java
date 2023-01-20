@@ -20,5 +20,10 @@ public class UserController {
         return userService.addUser(user);
     }
 
+    @PostMapping(path = "/finduser")
+    public @ResponseBody UserEntity finduser(@RequestParam String email){
+        return userService.findUser(email);
+    }
+
 
 }

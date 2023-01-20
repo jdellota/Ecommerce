@@ -1,35 +1,27 @@
 package com.example.Ecommerce.Controller;
 
+import com.example.Ecommerce.DTO.ProductDto;
+import com.example.Ecommerce.Entity.ProductEntity;
 import com.example.Ecommerce.Entity.UserEntity;
-import com.example.Ecommerce.Repository.UserRepository;
+import com.example.Ecommerce.RestController.ProductController;
 import com.example.Ecommerce.RestController.UserController;
-import com.example.Ecommerce.Service.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class UserView {
     @Autowired
-    private UserController restController;
-
+    private UserController userController;
     @Autowired
-    private UserRepository userRepository;
-//    @GetMapping("/registration")
-//    public String viewRegistration()
-//    {
-//        return"register";
-//    }
+    private ProductController productController;
+
+
 
 
     //Method that returns the index
@@ -50,25 +42,47 @@ public class UserView {
     //Method to add the user to database
     @PostMapping(path = "/adduser")
     public String addUser(@ModelAttribute("user") UserEntity user){
-        restController.addUser(user);
+        userController.addUser(user);
         return "index";
     }
 
 
-//    public String listUsers(Model model) {
-//        List<UserEntity> listUsers = userRepository.findAll();
-//        model.addAttribute("users", listUsers);
-//        return "home";
-//    }
+    //after login
     @GetMapping("/home")
 
     public String test(@CurrentSecurityContext(expression = "authentication")
                        Authentication authentication, Model model){
+        if(userController.finduser(authentication.getName()).getRole().equals("SELLER")) {
+            UserEntity user=userController.finduser(authentication.getName());
+            model.addAttribute("products", user.getProducts());
+            return "seller/index";
+        }
+        else if (userController.finduser(authentication.getName()).getRole().equals("CUSTOMER")) {
+            //go to customer/index
+                return "index";
+       }
+        return null;
 
-        model.addAttribute("users", authentication.getName());
-
-        return"home";
     }
+
+    @GetMapping("/addproductform")
+    public String viewProductForm(Model model){
+        ProductDto productDto=new ProductDto();
+        model.addAttribute("product",productDto);
+        return "seller/addproductform";
+    }
+
+    @PostMapping("/addproduct")
+
+    public String addProduct(@CurrentSecurityContext(expression = "authentication")
+                                 Authentication authentication, @ModelAttribute ProductDto productDto, Model model){
+        UserEntity user=userController.finduser(authentication.getName());
+        productDto.setUserid(Math.toIntExact(user.getId()));
+        productController.addProduct(productDto);
+        model.addAttribute("products", user.getProducts());
+        return "seller/index";
+    }
+
 
 
 }

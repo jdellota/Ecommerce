@@ -1,11 +1,6 @@
 package com.example.Ecommerce.DTO;
 
-import com.example.Ecommerce.Entity.UserEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
-public class ProductDTO {
+public class ProductDto {
 
     private String name;
 

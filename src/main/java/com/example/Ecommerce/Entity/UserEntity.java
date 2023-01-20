@@ -2,6 +2,8 @@ package com.example.Ecommerce.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name="users")
 public class UserEntity {
@@ -19,6 +21,18 @@ public class UserEntity {
 
     @Column(name="role")
     private String role;
+
+    @OneToMany(mappedBy = "userEntity")
+    private Set<ProductEntity> products;
+
+    public Set<ProductEntity> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductEntity> products) {
+        this.products = products;
+    }
+
 
     public Long getId() {
         return id;

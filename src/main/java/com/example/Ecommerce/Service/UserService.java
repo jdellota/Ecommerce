@@ -19,4 +19,7 @@ public class UserService {
         user.setPassword(encodedPassword);
         return userRepository.save(user);
     }
+    public UserEntity findUser(String email){
+        return userRepository.findByEmail(email);
+    }
 }
