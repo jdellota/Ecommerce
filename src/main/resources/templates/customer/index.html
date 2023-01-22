@@ -70,17 +70,39 @@
                   <td th:text="${order.getQty}"></td>
                   <td th:text="${order.getProductEntity().getPrice()}"></td>
 <!--                  <td th:text="${(order.getProductEntity().getPrice()*order.getProductEntity().getQty())}"></td>-->
-                  <td> <a th:href="@{/deleteorder/{id}(id=${order.getId()})}" class="btn btn-danger btn-sm">
+                  <td th:with="qty =${order.getQty()}, price = ${order.getProductEntity().getPrice()}, var = ${qty * price}" th:text="${var}"></td>
+                  <td>
+                      <a th:href="@{/updateorderform/{id}(id=${order.getId()})}" class="btn btn-warning btn-sm">
+                          <span class="glyphicon glyphicon-pencil"></span>
+                      </a>
+
+                      <a th:href="@{/deleteorder/{id}(id=${order.getId()})}" class="btn btn-danger btn-sm">
                       <span class="glyphicon glyphicon-trash"></span>
                     </a>
                   </td>
-<!--              </tr>-->
+              </tr>
+              <!--              </tr>-->
 <!--              <tr th:each="(${#aggregates.sum(user.getOrders().getPrice)}*)"></tr>-->
           </table>
+          <div>
+              <p>Order Summary</p>
+              <span>Total Amount:</span>
+              <span  th:text="${total}"></span>
+          </div>
     </div>
   </div>
 </body>
 </html>
+
+<!--<script>-->
+<!--    function calculateTotalAmount(){-->
+<!--        var price = document.getElementById('price').value;-->
+<!--        var qty = document.getElementById('qty').value;-->
+<!--        var ans = price * qty;-->
+<!--        document.getElementById('total').value = ans;-->
+<!--    }-->
+<!--</script>-->
+
 <script>
   $(document).ready(function () {
     $('#product_info').DataTable();

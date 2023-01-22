@@ -8,12 +8,17 @@ import com.example.Ecommerce.Entity.UserEntity;
 import com.example.Ecommerce.RestController.OrderController;
 import com.example.Ecommerce.RestController.ProductController;
 import com.example.Ecommerce.RestController.UserController;
+import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserView {
@@ -58,6 +63,12 @@ public class UserView {
         else if (user.getRole().equals("CUSTOMER")) {
             //Go to customer index and show all products
             model.addAttribute("products",productController.viewProducts());
+            Set<OrderEntity> orders= user.getOrders();
+            float total = 0;
+            for (OrderEntity order:orders) {
+                total += order.getQty() * order.getProductEntity().getPrice();
+            }
+            model.addAttribute("total",total);
             model.addAttribute("user",user);
                 return "customer/index";
        }
@@ -143,8 +154,51 @@ public class UserView {
                                 Authentication authentication, @PathVariable(value="id") long id, Model model){
         orderController.deleteOrder(id);
         UserEntity user=userController.finduser(authentication.getName());
+
+        Set<OrderEntity> orders= user.getOrders();
+        float total = 0;
+        for (OrderEntity order:orders) {
+            total += order.getQty() * order.getProductEntity().getPrice();
+        }
+        model.addAttribute("total",total);
+
         model.addAttribute("products",productController.viewProducts());
         model.addAttribute("user",user);
         return "customer/index";
     }
+
+    @GetMapping("/updateorderform/{id}")
+
+    public String editOrderForm(@PathVariable(value = "id") long id, Model model)
+    {
+        model.addAttribute("order",orderController.getOrder(id));
+        return "/customer/editorderform";
+    }
+
+    @PostMapping("/updateorder/{id}")
+
+    public String updateOrder(@CurrentSecurityContext(expression = "authentication")
+                               Authentication authentication,@PathVariable(value="id") long id, @ModelAttribute OrderDto orderDto, Model model)
+    {
+        UserEntity user = userController.finduser(authentication.getName());
+        OrderEntity orderEntity = orderController.getOrder(id);
+        orderEntity.setUserEntity(user);
+        orderEntity.setProductEntity(productController.getProduct(orderDto.getProductid()));
+        orderEntity.setQty(orderDto.getQty());
+        orderController.updateOrder(orderEntity);
+        Set<OrderEntity> orders= user.getOrders();
+        float total = 0;
+        for (OrderEntity order:orders) {
+            total += order.getQty() * order.getProductEntity().getPrice();
+        }
+        model.addAttribute("total",total);
+        model.addAttribute("order",user.getOrders());
+        model.addAttribute("products",productController.viewProducts());
+        model.addAttribute("user",user);
+        return "customer/index";
+
+    }
+
+
+
 }

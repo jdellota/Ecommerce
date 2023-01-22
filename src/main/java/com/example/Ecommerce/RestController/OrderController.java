@@ -20,4 +20,12 @@ public class OrderController {
         customerService.deleteOrder(id);
 
     }
+
+    public OrderEntity getOrder(long id) {
+        return customerService.getOrder(id);
+    }
+
+    public OrderEntity updateOrder(OrderEntity orderEntity) {
+        return customerService.updateOrder(orderEntity);
+    }
 }

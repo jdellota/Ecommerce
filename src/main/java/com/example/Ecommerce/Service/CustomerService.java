@@ -28,4 +28,12 @@ public class CustomerService {
     public OrderEntity deleteOrder(long id) {
         return orderRepository.deleteById(id);
     }
+
+    public OrderEntity getOrder(long id) {
+        return orderRepository.getReferenceById(id);
+    }
+
+    public OrderEntity updateOrder(OrderEntity orderEntity) {
+        return orderRepository.save(orderEntity);
+    }
 }
