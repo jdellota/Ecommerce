@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class = "col-md-4 col-md-offset-4">
+            <h2>Add Product</h2>
+            <div class="panel panel-default">
+                <div class = "panel-heading">
+                    <a th:href="@{/home}" class = "btn btn-primary btn-sm"> <span class="glyphicon glyphicon-home" aria-hidden="false"></span></a>
+                </div>
+                <div class = "panel-body">
+                    <form action="#"  METHOD="post">
+                        <fieldset>
+                            <div class ="form-group">
+                                <label class = "control-label">Price</label>
+                                <div class = "controls">
+                                    <input type = "number" name="price" id = "price" placeholder="" class = "form-control" onchange="calculateTotalAmount()" required>
+                                </div>
+                            </div>
+                            <div class ="form-group">
+                                <label class = "control-label">Quantity</label>
+                                <div class = "controls">
+                                    <input type = "number" min ="1" name="quantity"  placeholder="" class = "form-control" id="qty" required onchange="calculateTotalAmount()">
+                                </div>
+                            </div>
+                            <div class ="form-group">
+                                <label class = "control-label">Amount</label>
+                                <div class = "controls">
+                                    <input type = "number" name="amount"  placeholder="" class = "form-control" id="amount" readonly required>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-info col-2 pull-right">Add to Cart</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+    function calculateTotalAmount(){
+        var price = document.getElementById('price').value;
+        var qty = document.getElementById('qty').value;
+        var ans = price * qty;
+        document.getElementById('amount').value = ans;
+    }
+</script>
+</html>

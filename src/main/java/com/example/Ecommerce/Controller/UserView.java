@@ -84,7 +84,6 @@ public class UserView {
         model.addAttribute("products", user.getProducts());
         return "seller/index";
     }
-
     //Customers
 
     @PostMapping("/viewproduct")
@@ -92,6 +91,4 @@ public class UserView {
         model.addAttribute("products",productController.viewProducts());
         return "customer/index";
     }
-
-
 }
