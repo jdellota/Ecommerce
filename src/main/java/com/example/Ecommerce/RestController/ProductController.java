@@ -2,6 +2,7 @@ package com.example.Ecommerce.RestController;
 
 import com.example.Ecommerce.DTO.ProductDto;
 import com.example.Ecommerce.Entity.ProductEntity;
+import com.example.Ecommerce.Entity.UserEntity;
 import com.example.Ecommerce.Service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

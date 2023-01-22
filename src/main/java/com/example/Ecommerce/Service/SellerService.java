@@ -6,6 +6,7 @@ import com.example.Ecommerce.Repository.ProductRepository;
 import com.example.Ecommerce.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class SellerService {
         productEntity.setUserEntity(userRepository.getReferenceById((long) productDto.getUserid()));
         return productRepository.save(productEntity);
     }
+
     public List<ProductEntity> viewAllProducts(){
         return productRepository.findAll();
     }

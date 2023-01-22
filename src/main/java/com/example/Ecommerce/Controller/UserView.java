@@ -10,10 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserView {
@@ -23,20 +20,14 @@ public class UserView {
     private ProductController productController;
 
 
-
-
     //Method that returns the index
     @GetMapping("/index")
     public String viewHome(){
         return "index";
     }
-
-
     //Method to view the Registration Form
     @GetMapping("/register")
-
     public String showRegistrationForm(Model model){
-
         return "register";
     }
 
@@ -47,22 +38,21 @@ public class UserView {
         return "index";
     }
 
-
     //after login
     @GetMapping("/home")
 
-    public String test(@CurrentSecurityContext(expression = "authentication")
+    public String checkUser(@CurrentSecurityContext(expression = "authentication")
                        Authentication authentication, Model model){
-        UserEntity user=userController.finduser(authentication.getName());
-        if(user.getRole().equals("SELLER")) {
+        if(userController.finduser(authentication.getName()).getRole().equals("SELLER")) {
             //get current logged in user
+            UserEntity user=userController.finduser(authentication.getName());
             model.addAttribute("products", user.getProducts());
             return "seller/index";
         }
         else if (userController.finduser(authentication.getName()).getRole().equals("CUSTOMER")) {
             //Go to customer index and show all products
             model.addAttribute("products",productController.viewProducts());
-            return "customer/index";
+                return "customer/index";
        }
         return null;
 
