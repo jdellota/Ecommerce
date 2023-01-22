@@ -24,6 +24,19 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "userEntity")
     private Set<ProductEntity> products;
+    @OneToMany(mappedBy = "userEntity")
+    private Set<OrderEntity> orders;
+
+
+    public Set<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderEntity> orders) {
+        this.orders = orders;
+    }
+
+
 
     public Set<ProductEntity> getProducts() {
         return products;

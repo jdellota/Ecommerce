@@ -3,6 +3,7 @@ package com.example.Ecommerce.Entity;
 import jakarta.persistence.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Entity
 @Table(name="products")
@@ -18,6 +19,18 @@ public class ProductEntity {
     @ManyToOne
     @JoinColumn(name = "userid", referencedColumnName = "userid")
     private UserEntity userEntity;
+    @OneToMany(mappedBy = "productEntity")
+    private Set<OrderEntity> orders;
+
+    public Set<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderEntity> orders) {
+        this.orders = orders;
+    }
+
+
     public UserEntity getUserEntity() {
         return userEntity;
     }
