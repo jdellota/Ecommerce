@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -52,16 +53,16 @@ public class UserView {
 
     public String test(@CurrentSecurityContext(expression = "authentication")
                        Authentication authentication, Model model){
-        if(userController.finduser(authentication.getName()).getRole().equals("SELLER")) {
+        UserEntity user=userController.finduser(authentication.getName());
+        if(user.getRole().equals("SELLER")) {
             //get current logged in user
-            UserEntity user=userController.finduser(authentication.getName());
-
             model.addAttribute("products", user.getProducts());
             return "seller/index";
         }
         else if (userController.finduser(authentication.getName()).getRole().equals("CUSTOMER")) {
-            //go to customer/index
-                return "index";
+            //Go to customer index and show all products
+            model.addAttribute("products",productController.viewProducts());
+            return "customer/index";
        }
         return null;
 
@@ -85,9 +86,22 @@ public class UserView {
         return "seller/index";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@CurrentSecurityContext(expression = "authentication")
+                                    Authentication authentication, @PathVariable(value="id") long id, Model model){
+        productController.deleteProductById(id);
+        UserEntity user=userController.finduser(authentication.getName());
+        model.addAttribute("products", user.getProducts());
+        return "seller/index";
+    }
 
     //Customers
 
+    @PostMapping("/viewproduct")
+    public String viewProducts(Model model){
+        model.addAttribute("products",productController.viewProducts());
+        return "customer/index";
+    }
 
 
 }

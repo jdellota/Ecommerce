@@ -6,6 +6,8 @@ import com.example.Ecommerce.Service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/productapi")
 public class ProductController {
@@ -17,5 +19,14 @@ public class ProductController {
         //return  productDTO;
     }
 
+    @PostMapping(path="/viewproduct")
+    public List<ProductEntity> viewProducts(){
+        return sellerService.viewAllProducts();
+    }
+
+    @DeleteMapping(path="/delete/{id}")
+    public ProductEntity deleteProductById(@PathVariable long id){
+        return sellerService.deleteProductById(id);
+    }
 
 }

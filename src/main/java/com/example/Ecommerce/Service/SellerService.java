@@ -7,6 +7,8 @@ import com.example.Ecommerce.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SellerService {
     @Autowired
@@ -20,4 +22,11 @@ public class SellerService {
         productEntity.setUserEntity(userRepository.getReferenceById((long) productDto.getUserid()));
         return productRepository.save(productEntity);
     }
+    public List<ProductEntity> viewAllProducts(){
+        return productRepository.findAll();
+    }
+    public ProductEntity deleteProductById(long id){
+        return productRepository.deleteById(id);
+    }
+
 }
