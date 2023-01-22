@@ -61,7 +61,7 @@ public class UserView {
             model.addAttribute("products", user.getProducts());
             return "seller/index";
         }
-        else if (userController.finduser(authentication.getName()).getRole().equals("CUSTOMER")) {
+        else if (user.getRole().equals("CUSTOMER")) {
             //Go to customer index and show all products
             model.addAttribute("products",orderController.viewProducts());
             return "customer/index";
@@ -104,6 +104,8 @@ public class UserView {
         model.addAttribute("products",orderController.viewProducts());
         return "customer/index";
     }
+
+
 
 
 }
