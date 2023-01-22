@@ -22,9 +22,7 @@ public class SellerService {
         productEntity.setUserEntity(userRepository.getReferenceById((long) productDto.getUserid()));
         return productRepository.save(productEntity);
     }
-    public List<ProductEntity> viewAllProducts(){
-        return productRepository.findAll();
-    }
+
     public ProductEntity deleteProductById(long id){
         return productRepository.deleteById(id);
     }

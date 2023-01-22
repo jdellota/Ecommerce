@@ -19,10 +19,7 @@ public class ProductController {
         //return  productDTO;
     }
 
-    @PostMapping(path="/viewproduct")
-    public List<ProductEntity> viewProducts(){
-        return sellerService.viewAllProducts();
-    }
+
 
     @DeleteMapping(path="/delete/{id}")
     public ProductEntity deleteProductById(@PathVariable long id){

@@ -3,6 +3,7 @@ package com.example.Ecommerce.Controller;
 import com.example.Ecommerce.DTO.ProductDto;
 import com.example.Ecommerce.Entity.ProductEntity;
 import com.example.Ecommerce.Entity.UserEntity;
+import com.example.Ecommerce.RestController.OrderController;
 import com.example.Ecommerce.RestController.ProductController;
 import com.example.Ecommerce.RestController.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class UserView {
     private UserController userController;
     @Autowired
     private ProductController productController;
-
+    @Autowired
+    private OrderController orderController;
 
 
 
@@ -61,7 +63,7 @@ public class UserView {
         }
         else if (userController.finduser(authentication.getName()).getRole().equals("CUSTOMER")) {
             //Go to customer index and show all products
-            model.addAttribute("products",productController.viewProducts());
+            model.addAttribute("products",orderController.viewProducts());
             return "customer/index";
        }
         return null;
@@ -99,7 +101,7 @@ public class UserView {
 
     @PostMapping("/viewproduct")
     public String viewProducts(Model model){
-        model.addAttribute("products",productController.viewProducts());
+        model.addAttribute("products",orderController.viewProducts());
         return "customer/index";
     }
 

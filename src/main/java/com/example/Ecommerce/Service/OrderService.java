@@ -9,14 +9,19 @@ import com.example.Ecommerce.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class CustomerService {
+public class OrderService {
     @Autowired
     UserRepository userRepository;
     @Autowired
     ProductRepository productRepository;
     @Autowired
     OrderRepository orderRepository;
+    public List<ProductEntity> viewAllProducts(){
+        return productRepository.findAll();
+    }
     public OrderEntity addOrder(OrderDto orderDto){
         OrderEntity orderEntity=new OrderEntity();
         orderEntity.setAmount(orderDto.getAmount());
