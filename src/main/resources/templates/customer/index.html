@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Product List</title>
@@ -44,7 +44,7 @@
           <tr th:each="product:${products}">
               <td th:text="${product.getName()}"></td>
               <td th:text="${product.getPrice()}"></td>
-              <td><a href="#" class = "btn btn-info btn-sm">Add to cart</a>
+              <td><a th:href="@{/addtocartform/{id}(id=${product.getId()})}" class = "btn btn-info btn-sm">Add to cart</a>
           </tr>
           </tbody>
 

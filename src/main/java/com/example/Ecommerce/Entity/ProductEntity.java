@@ -2,7 +2,6 @@ package com.example.Ecommerce.Entity;
 
 import jakarta.persistence.*;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -41,8 +40,8 @@ public class ProductEntity {
 
 
 
-    public Long getId() {
-        return id;
+    public Long getId(long id) {
+        return this.id;
     }
 
     public void setId(Long id) {

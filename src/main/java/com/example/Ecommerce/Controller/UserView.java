@@ -1,8 +1,11 @@
 package com.example.Ecommerce.Controller;
 
+import com.example.Ecommerce.DTO.OrderDto;
 import com.example.Ecommerce.DTO.ProductDto;
+import com.example.Ecommerce.Entity.OrderEntity;
 import com.example.Ecommerce.Entity.ProductEntity;
 import com.example.Ecommerce.Entity.UserEntity;
+import com.example.Ecommerce.RestController.OrderController;
 import com.example.Ecommerce.RestController.ProductController;
 import com.example.Ecommerce.RestController.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ public class UserView {
     private UserController userController;
     @Autowired
     private ProductController productController;
+    @Autowired
+    private OrderController orderController;
 
 
     //Method that returns the index
@@ -90,5 +95,23 @@ public class UserView {
     public String viewProducts(Model model){
         model.addAttribute("products",productController.viewProducts());
         return "customer/index";
+    }
+
+    @GetMapping("/addtocartform/{id}")
+    public String orderForm(@PathVariable(value="id") long id, Model model){
+        ProductEntity productEntity=productController.getProduct(id);
+        model.addAttribute("product", productEntity);
+        return "customer/addorderform";
+    }
+
+    @PostMapping("/addtocart/{id}")
+    public String addToCart(@CurrentSecurityContext(expression = "authentication")
+                                Authentication authentication, @PathVariable(value="id") long id, @ModelAttribute OrderDto orderDto, Model model){
+        orderDto.setProductid(Math.toIntExact(id));
+        UserEntity user=userController.finduser(authentication.getName());
+        orderDto.setUserid(Math.toIntExact(user.getId()));
+        orderController.addOrder(orderDto);
+        model.addAttribute("products", user.getProducts());
+        return "seller/index";
     }
 }

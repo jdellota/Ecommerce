@@ -19,7 +19,7 @@ public class CustomerService {
     OrderRepository orderRepository;
     public OrderEntity addOrder(OrderDto orderDto){
         OrderEntity orderEntity=new OrderEntity();
-        orderEntity.setAmount(orderDto.getAmount());
+        orderEntity.setQty(orderDto.getQty());
         orderEntity.setUserEntity(userRepository.getReferenceById((long) orderDto.getUserid()));
         orderEntity.setProductEntity(productRepository.getReferenceById((long) orderDto.getProductid()));
         return orderRepository.save(orderEntity);

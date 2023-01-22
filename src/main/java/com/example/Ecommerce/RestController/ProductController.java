@@ -30,4 +30,7 @@ public class ProductController {
         return sellerService.deleteProductById(id);
     }
 
+    public ProductEntity getProduct(long id) {
+        return sellerService.getProduct(id);
+    }
 }

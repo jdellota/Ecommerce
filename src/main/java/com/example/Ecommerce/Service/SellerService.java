@@ -31,4 +31,7 @@ public class SellerService {
         return productRepository.deleteById(id);
     }
 
+    public ProductEntity getProduct(long id) {
+        return productRepository.getReferenceById(id);
+    }
 }

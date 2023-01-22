@@ -9,8 +9,9 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="orderid")
     private Long id;
-    @Column(name="amount")
-    private Float amount;
+
+    @Column(name="qty")
+    private int qty;
 
     @ManyToOne
     @JoinColumn(name = "userid", referencedColumnName = "userid")
@@ -18,6 +19,13 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "productid", referencedColumnName = "productid")
     private ProductEntity productEntity;
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
     public Long getId() {
         return id;
     }
@@ -26,13 +34,7 @@ public class OrderEntity {
         this.id = id;
     }
 
-    public Float getAmount() {
-        return amount;
-    }
 
-    public void setAmount(Float amount) {
-        this.amount = amount;
-    }
 
     public UserEntity getUserEntity() {
         return userEntity;

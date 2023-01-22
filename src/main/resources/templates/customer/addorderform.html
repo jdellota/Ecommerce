@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Order</title>
@@ -14,18 +14,18 @@
                     <a th:href="@{/home}" class = "btn btn-primary btn-sm"> <span class="glyphicon glyphicon-home" aria-hidden="false"></span></a>
                 </div>
                 <div class = "panel-body">
-                    <form action="#"  METHOD="post">
+                    <form th:action="@{/addtocart/{id}(id=${product.getId()})}" th:object="${order}"  METHOD="post">
                         <fieldset>
                             <div class ="form-group">
                                 <label class = "control-label">Price</label>
                                 <div class = "controls">
-                                    <input type = "number" name="price" id = "price" placeholder="" class = "form-control" onchange="calculateTotalAmount()" required>
+                                    <input type = "text" th:value="${product.getPrice}" id = "price" placeholder="" class = "form-control" onchange="calculateTotalAmount()" required readonly>
                                 </div>
                             </div>
                             <div class ="form-group">
                                 <label class = "control-label">Quantity</label>
                                 <div class = "controls">
-                                    <input type = "number" min ="1" name="quantity"  placeholder="" class = "form-control" id="qty" required onchange="calculateTotalAmount()">
+                                    <input type = "number" min ="1"  field="*{qty}" name="qty"  placeholder="" class = "form-control" id="qty" required onchange="calculateTotalAmount()">
                                 </div>
                             </div>
                             <div class ="form-group">
