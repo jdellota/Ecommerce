@@ -33,4 +33,8 @@ public class ProductController {
     public ProductEntity getProduct(long id) {
         return sellerService.getProduct(id);
     }
+
+    public ProductEntity updateProduct(ProductEntity productEntity) {
+        return sellerService.updateProduct(productEntity);
+    }
 }

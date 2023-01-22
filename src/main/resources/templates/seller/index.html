@@ -45,9 +45,10 @@
                     <td th:text="${product.getName()}"></td>
                     <td th:text="${product.getPrice()}"></td>
                     <td>
-                        <a href="#" class="btn btn-warning btn-sm">
+                        <a th:href="@{/updateproductform/{id}(id=${product.getId()})}" class="btn btn-warning btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
+
                         <a th:href="@{/delete/{id}(id=${product.getId()})}" class="btn btn-danger btn-sm">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>

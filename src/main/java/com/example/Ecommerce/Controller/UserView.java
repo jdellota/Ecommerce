@@ -91,6 +91,25 @@ public class UserView {
         model.addAttribute("products", user.getProducts());
         return "seller/index";
     }
+
+    @GetMapping("/updateproductform/{id}")
+
+    public String updateProductForm(@PathVariable(value="id") long id, Model model){
+        model.addAttribute("product",productController.getProduct(id));
+        return"seller/editproductform";
+    }
+
+    @PostMapping("updateproduct/{id}")
+
+    public String updateProduct(@CurrentSecurityContext(expression = "authentication")
+        Authentication authentication, @PathVariable(value="id") long id, @ModelAttribute ProductEntity productEntity, Model model){
+        UserEntity user=userController.finduser(authentication.getName());
+        productEntity.setUserEntity(user);
+        productController.updateProduct(productEntity);
+        model.addAttribute("products", user.getProducts());
+        return"seller/index";
+    }
+
     //Customers
 
     @PostMapping("/viewproduct")
@@ -106,6 +125,7 @@ public class UserView {
         return "customer/addorderform";
     }
 
+    //Code for Add To Cart
     @PostMapping("/addtocart/{id}")
     public String addToCart(@CurrentSecurityContext(expression = "authentication")
                                 Authentication authentication, @PathVariable(value="id") long id, @ModelAttribute OrderDto orderDto, Model model){

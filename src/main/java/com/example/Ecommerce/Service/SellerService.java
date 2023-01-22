@@ -34,4 +34,8 @@ public class SellerService {
     public ProductEntity getProduct(long id) {
         return productRepository.getReferenceById(id);
     }
+
+    public ProductEntity updateProduct(ProductEntity productEntity) {
+        return productRepository.save(productEntity);
+    }
 }
