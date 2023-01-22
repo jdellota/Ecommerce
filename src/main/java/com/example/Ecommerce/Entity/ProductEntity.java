@@ -40,8 +40,8 @@ public class ProductEntity {
 
 
 
-    public Long getId(long id) {
-        return this.id;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {

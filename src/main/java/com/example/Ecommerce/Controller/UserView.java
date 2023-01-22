@@ -112,6 +112,6 @@ public class UserView {
         orderDto.setUserid(Math.toIntExact(user.getId()));
         orderController.addOrder(orderDto);
         model.addAttribute("products", user.getProducts());
-        return "seller/index";
+        return "customer/index";
     }
 }
