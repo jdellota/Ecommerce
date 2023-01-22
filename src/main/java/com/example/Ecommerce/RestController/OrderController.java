@@ -4,9 +4,7 @@ import com.example.Ecommerce.DTO.OrderDto;
 import com.example.Ecommerce.Entity.OrderEntity;
 import com.example.Ecommerce.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orderapi")
@@ -17,5 +15,9 @@ public class OrderController {
     public OrderEntity addOrder(OrderDto orderDto){
         return customerService.addOrder(orderDto);
     }
+    @DeleteMapping(path="/delete/{id}")
+    public void deleteOrder(@PathVariable long id ) {
+        customerService.deleteOrder(id);
 
+    }
 }

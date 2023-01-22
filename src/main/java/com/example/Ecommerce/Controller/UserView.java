@@ -48,15 +48,17 @@ public class UserView {
 
     public String checkUser(@CurrentSecurityContext(expression = "authentication")
                        Authentication authentication, Model model){
-        if(userController.finduser(authentication.getName()).getRole().equals("SELLER")) {
+        UserEntity user=userController.finduser(authentication.getName());
+        if(user.getRole().equals("SELLER")) {
             //get current logged in user
-            UserEntity user=userController.finduser(authentication.getName());
+
             model.addAttribute("products", user.getProducts());
             return "seller/index";
         }
-        else if (userController.finduser(authentication.getName()).getRole().equals("CUSTOMER")) {
+        else if (user.getRole().equals("CUSTOMER")) {
             //Go to customer index and show all products
             model.addAttribute("products",productController.viewProducts());
+            model.addAttribute("user",user);
                 return "customer/index";
        }
         return null;
@@ -111,7 +113,18 @@ public class UserView {
         UserEntity user=userController.finduser(authentication.getName());
         orderDto.setUserid(Math.toIntExact(user.getId()));
         orderController.addOrder(orderDto);
-        model.addAttribute("products", user.getProducts());
+        model.addAttribute("products",productController.viewProducts());
+        model.addAttribute("user",user);
+        return "customer/index";
+    }
+
+    @GetMapping("/deleteorder/{id}")
+    public String deleteOrder(@CurrentSecurityContext(expression = "authentication")
+                                Authentication authentication, @PathVariable(value="id") long id, Model model){
+        orderController.deleteOrder(id);
+        UserEntity user=userController.finduser(authentication.getName());
+        model.addAttribute("products",productController.viewProducts());
+        model.addAttribute("user",user);
         return "customer/index";
     }
 }

@@ -58,10 +58,24 @@
               <thead>
               <tr>
                   <th class="text-center">Product</th>
-                  <th class="text-center">Amount</th>
+
+                  <th class="text-center">Quantity</th>
+                  <th class="text-center">Price</th>
+                  <th class="text-center">Total</th>
                   <th class="text-center">Action</th>
               </tr>
               </thead>
+              <tr th:each="order:${user.getOrders()}">
+                  <td th:text="${order.getProductEntity().getName()}"></td>
+                  <td th:text="${order.getQty}"></td>
+                  <td th:text="${order.getProductEntity().getPrice()}"></td>
+<!--                  <td th:text="${(order.getProductEntity().getPrice()*order.getProductEntity().getQty())}"></td>-->
+                  <td> <a th:href="@{/deleteorder/{id}(id=${order.getId()})}" class="btn btn-danger btn-sm">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </td>
+<!--              </tr>-->
+<!--              <tr th:each="(${#aggregates.sum(user.getOrders().getPrice)}*)"></tr>-->
           </table>
     </div>
   </div>

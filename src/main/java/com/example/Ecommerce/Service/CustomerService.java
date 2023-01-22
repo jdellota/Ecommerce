@@ -24,4 +24,8 @@ public class CustomerService {
         orderEntity.setProductEntity(productRepository.getReferenceById((long) orderDto.getProductid()));
         return orderRepository.save(orderEntity);
     }
+
+    public OrderEntity deleteOrder(long id) {
+        return orderRepository.deleteById(id);
+    }
 }
