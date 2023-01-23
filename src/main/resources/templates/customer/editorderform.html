@@ -37,7 +37,7 @@
               <div class ="form-group">
                 <label class = "control-label">Quantity</label>
                 <div class = "controls">
-                  <input type = "text" field="*{qty}" name="qty" th:value="${order.getQty()}" class="form-control" required>
+                  <input type = "number" field="*{qty}" name="qty" th:value="${order.getQty()}" class="form-control" required min="1">
                 </div>
               </div>
 
