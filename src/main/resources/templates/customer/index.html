@@ -86,7 +86,7 @@
           </table>
           <div>
               <p>Order Summary</p>
-              <span>Total Amount:</span>
+              <b><span>Total Amount:</span></b>
               <span  th:text="${total}"></span>
           </div>
     </div>
@@ -104,9 +104,11 @@
 <!--</script>-->
 
 <script>
+
   $(document).ready(function () {
     $('#product_info').DataTable();
   });
+
   $(document).ready(function () {
       $('#cart-info').DataTable();
   });
