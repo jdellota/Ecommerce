@@ -9,6 +9,8 @@ import com.example.Ecommerce.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerService {
     @Autowired
@@ -23,6 +25,16 @@ public class CustomerService {
         orderEntity.setUserEntity(userRepository.getReferenceById((long) orderDto.getUserid()));
         orderEntity.setProductEntity(productRepository.getReferenceById((long) orderDto.getProductid()));
         return orderRepository.save(orderEntity);
+    }
+    public List<ProductEntity> viewProducts(long id){
+        List<ProductEntity> products=productRepository.findAll();
+        List<OrderEntity> userOrders = userRepository.getReferenceById(id).getOrders();
+
+        for (OrderEntity order:userOrders
+             ) {
+            products.remove(order.getProductEntity());
+        }
+        return products;
     }
 
     public OrderEntity deleteOrder(long id) {

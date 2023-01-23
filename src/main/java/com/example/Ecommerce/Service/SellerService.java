@@ -6,9 +6,7 @@ import com.example.Ecommerce.Repository.ProductRepository;
 import com.example.Ecommerce.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
 
 @Service
 public class SellerService {
@@ -21,12 +19,10 @@ public class SellerService {
         productEntity.setName(productDto.getName());
         productEntity.setPrice(productDto.getPrice());
         productEntity.setUserEntity(userRepository.getReferenceById((long) productDto.getUserid()));
-        return productRepository.save(productEntity);
+            return productRepository.save(productEntity);
     }
 
-    public List<ProductEntity> viewAllProducts(){
-        return productRepository.findAll();
-    }
+
     public ProductEntity deleteProductById(long id){
         return productRepository.deleteById(id);
     }

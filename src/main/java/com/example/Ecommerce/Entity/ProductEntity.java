@@ -2,7 +2,7 @@ package com.example.Ecommerce.Entity;
 
 import jakarta.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name="products")
@@ -18,17 +18,16 @@ public class ProductEntity {
     @ManyToOne
     @JoinColumn(name = "userid", referencedColumnName = "userid")
     private UserEntity userEntity;
-    @OneToMany(mappedBy = "productEntity")
-    private Set<OrderEntity> orders;
+    @OneToMany(mappedBy = "productEntity", cascade=CascadeType.ALL)
+    private List<OrderEntity> orders;
 
-    public Set<OrderEntity> getOrders() {
+    public List<OrderEntity> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<OrderEntity> orders) {
+    public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
     }
-
 
     public UserEntity getUserEntity() {
         return userEntity;

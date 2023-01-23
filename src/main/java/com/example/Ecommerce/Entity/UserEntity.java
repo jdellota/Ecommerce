@@ -2,7 +2,7 @@ package com.example.Ecommerce.Entity;
 
 import jakarta.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -23,29 +23,26 @@ public class UserEntity {
     private String role;
 
     @OneToMany(mappedBy = "userEntity")
-    private Set<ProductEntity> products;
+    private List<ProductEntity> products;
     @OneToMany(mappedBy = "userEntity")
-    private Set<OrderEntity> orders;
+    private List<OrderEntity> orders;
 
 
-    public Set<OrderEntity> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<OrderEntity> orders) {
-        this.orders = orders;
-    }
-
-
-
-    public Set<ProductEntity> getProducts() {
+    public List<ProductEntity> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<ProductEntity> products) {
+    public void setProducts(List<ProductEntity> products) {
         this.products = products;
     }
 
+    public List<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderEntity> orders) {
+        this.orders = orders;
+    }
 
     public Long getId() {
         return id;

@@ -2,7 +2,8 @@ package com.example.Ecommerce.RestController;
 
 import com.example.Ecommerce.DTO.ProductDto;
 import com.example.Ecommerce.Entity.ProductEntity;
-import com.example.Ecommerce.Entity.UserEntity;
+
+import com.example.Ecommerce.Service.CustomerService;
 import com.example.Ecommerce.Service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +15,17 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private SellerService sellerService;
+    @Autowired
+    private CustomerService customerService;
     @PostMapping(path = "/addproduct")
     public ProductEntity addProduct( ProductDto productDTO){
         return sellerService.addProduct(productDTO);
         //return  productDTO;
     }
 
-    @PostMapping(path="/viewproduct")
-    public List<ProductEntity> viewProducts(){
-        return sellerService.viewAllProducts();
+    @PostMapping(path="/viewproduct/{id}")
+    public List<ProductEntity> viewProducts(@PathVariable long id){
+        return customerService.viewProducts(id);
     }
 
     @DeleteMapping(path="/delete/{id}")
