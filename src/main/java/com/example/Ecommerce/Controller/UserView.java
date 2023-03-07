@@ -129,7 +129,6 @@ public class UserView {
         return "customer/addorderform";
     }
 
-    //Code for Add To Cart
     @PostMapping("/addtocart/{id}")
     public String addToCart(@CurrentSecurityContext(expression = "authentication")
                                 Authentication authentication, @PathVariable(value="id") long id, @ModelAttribute OrderDto orderDto, Model model){
@@ -137,6 +136,14 @@ public class UserView {
         UserEntity user=userController.finduser(authentication.getName());
         orderDto.setUserid(Math.toIntExact(user.getId()));
         orderController.addOrder(orderDto);
+
+        List<OrderEntity> orders= user.getOrders();
+        float total = 0;
+        for (OrderEntity order:orders) {
+            total += order.getQty() * order.getProductEntity().getPrice();
+        }
+        model.addAttribute("total",total);
+
         model.addAttribute("products",productController.viewProducts(user.getId()));
         model.addAttribute("user",user);
         return "customer/index";
@@ -185,9 +192,12 @@ public class UserView {
             total += order.getQty() * order.getProductEntity().getPrice();
         }
         model.addAttribute("total",total);
+
         model.addAttribute("order",user.getOrders());
         model.addAttribute("products",productController.viewProducts(user.getId()));
         model.addAttribute("user",user);
         return "customer/index";
     }
+
+
 }
